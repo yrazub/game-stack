@@ -1,0 +1,20 @@
+{
+  "name": "game-stack",
+  "version": "1.0.0",
+  "description": "Demo web site for high-load gaming portal",
+  "homepage": "https://github.com/yrazub/game-stack#readme",
+  "bugs": {
+    "url": "https://github.com/yrazub/game-stack/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yrazub/game-stack.git"
+  },
+  "license": "ISC",
+  "author": "Yurii Razubaiev",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
