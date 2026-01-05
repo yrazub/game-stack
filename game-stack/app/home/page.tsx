@@ -7,7 +7,7 @@ import { urlFor } from '@/lib/sanity/image';
 import Image from 'next/image'
 
 // Revalidate this page every 60 seconds (ISR)
-export const revalidate = 60;
+export const revalidate = 900; // 15 minutes
 
 export default async function HomePage() {
   // Fetching data in parallel for speed
