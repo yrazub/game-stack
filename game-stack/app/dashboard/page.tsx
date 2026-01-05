@@ -1,6 +1,7 @@
 // app/dashboard/page.tsx
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { signOut } from '@/app/auth/actions'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -39,7 +40,7 @@ export default async function DashboardPage() {
         </div>
 
         {/* XP Progress Bar */}
-        <div className="mt-8 bg-slate-800 p-6 rounded-xl border border-slate-700">
+        <div className="my-8 bg-slate-800 p-6 rounded-xl border border-slate-700">
           <div className="flex justify-between mb-2 font-bold">
             <span>XP Progress</span>
             <span className="text-blue-400">{profile?.xp || 0} / 2000 XP</span>
@@ -53,10 +54,11 @@ export default async function DashboardPage() {
         </div>
 
         {/* Sign Out Button (form for server action) */}
-        <form action="/auth/signout" method="post" className="mt-8">
-          <button className="px-6 py-2 bg-red-600/20 hover:bg-red-600/40 border border-red-600/50 rounded-lg text-red-500 font-bold transition">
-            Logout
-          </button>
+
+        <form action={signOut}>
+            <button className="cursor-pointer px-6 py-2 bg-red-600/20 hover:bg-red-600/40 border border-red-600/50 rounded-lg text-red-500 font-bold transition">
+                Logout
+            </button>
         </form>
       </div>
     </div>

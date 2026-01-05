@@ -1,6 +1,10 @@
 // lib/sanity/client.ts
 import { createClient } from 'next-sanity'
 
+if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+  console.error("CRITICAL: NEXT_PUBLIC_SANITY_PROJECT_ID is missing!");
+}
+
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',

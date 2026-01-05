@@ -14,7 +14,7 @@ async function repairAll() {
     const email = `player_${i}@example.com`
     
     // 1. Get the user ID by email
-    const { data: { users }, error: fetchError } = await supabase.auth.admin.listUsers()
+    const { data: { users } } = await supabase.auth.admin.listUsers()
     const user = users.find(u => u.email === email)
 
     if (!user) {

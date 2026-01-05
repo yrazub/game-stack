@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server';
 import HeroBanner from './hero';
 import Navbar from './navbar';
 import LeaderboardTable from './leaderboard';
+import { urlFor } from '@/lib/sanity/image';
+import Image from 'next/image'
 
 // Revalidate this page every 60 seconds (ISR)
 export const revalidate = 60;
@@ -25,12 +27,12 @@ export default async function HomePage() {
     <div className="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-blue-500/30">
       <Navbar />
 
-      {/* Hero Section with Sanity Banners */}
-      <section className="relative">
-        {banners.length > 0 && <HeroBanner banner={banners[0]} />}
-      </section>
+        {/* Hero Section with All Sanity Banners */}
+        <section className="relative h-[60vh] md:h-[80vh]">
+        {banners.length > 0 && <HeroBanner banners={banners} />}
+        </section>
 
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="max-w-8xl mx-auto px-12 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
         
         {/* News Section (Left/Center Column) */}
         <div className="lg:col-span-2 space-y-8">
@@ -40,8 +42,21 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {newsData.map((item: any) => (
               <article key={item._id} className="group bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-blue-500/50 transition-all shadow-lg">
-                <div className="h-48 bg-slate-800 relative">
-                   {/* If news has images, use urlFor(item.image).url() here */}
+                <div className="h-48 bg-slate-800 relative overflow-hidden">
+                {item.mainImage ? (
+                    <Image
+                        src={urlFor(item.mainImage).url()}
+                        alt={item.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                ) : (
+                    // Fallback if no image exists in Sanity
+                    <div className="flex items-center justify-center h-full text-slate-600 bg-slate-900 uppercase font-black text-xs tracking-widest">
+                    No Preview Available
+                    </div>
+                )}
                 </div>
                 <div className="p-6">
                   <span className="text-xs font-bold text-blue-500 uppercase tracking-widest">{item.category || 'News'}</span>
